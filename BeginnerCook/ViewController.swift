@@ -101,4 +101,9 @@ extension ViewController: UIViewControllerTransitioningDelegate {
                            source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
     return transition
   }
+
+  func animationController(forDismissed dismissed: UIViewController)
+                          -> UIViewControllerAnimatedTransitioning? {
+    return nil
+  }
 }
