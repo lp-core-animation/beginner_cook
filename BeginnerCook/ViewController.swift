@@ -7,6 +7,7 @@ class ViewController: UIViewController {
   @IBOutlet var listView: UIScrollView!
   @IBOutlet var bgImage: UIImageView!
   var selectedImage: UIImageView?
+  let transition = PopAnimator()
   
   //MARK: UIViewController
   
@@ -88,10 +89,16 @@ class ViewController: UIViewController {
     let herbDetails = storyboard!.instantiateViewController(withIdentifier: "HerbDetailsViewController") as! HerbDetailsViewController
     herbDetails.herb = selectedHerb
     herbDetails.modalPresentationStyle = .overFullScreen
+    herbDetails.transitioningDelegate = self
     present(herbDetails, animated: true, completion: nil)
   }
 }
 
 extension ViewController: UIViewControllerTransitioningDelegate {
-  
+
+  func animationController(forPresented presented: UIViewController,
+                           presenting: UIViewController,
+                           source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    return transition
+  }
 }
