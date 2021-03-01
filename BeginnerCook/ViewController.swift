@@ -13,7 +13,9 @@ class ViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+    transition.dismissCompletion = {
+      self.selectedImage!.isHidden = false
+    }
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -107,7 +109,8 @@ extension ViewController: UIViewControllerTransitioningDelegate {
   }
 
   func animationController(forDismissed dismissed: UIViewController)
-                          -> UIViewControllerAnimatedTransitioning? {
-    return nil
+    -> UIViewControllerAnimatedTransitioning? {
+      transition.presenting = false
+      return transition
   }
 }

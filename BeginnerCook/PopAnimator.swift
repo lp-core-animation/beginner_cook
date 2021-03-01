@@ -15,6 +15,7 @@ UIViewControllerAnimatedTransitioning {
   let duration = 1.0
   var presenting = true
   var originFrame = CGRect.zero
+  var dismissCompletion: (() -> Void)?
 
   func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
     return duration
@@ -60,6 +61,9 @@ UIViewControllerAnimatedTransitioning {
                                               y:finalFrame.midY)
                     }, completion: { _ in
                         transitionContext.completeTransition(true)
+                        if !self.presenting {
+                          self.dismissCompletion?()
+                        }
                       })
 
   }
